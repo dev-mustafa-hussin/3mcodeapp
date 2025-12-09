@@ -22,8 +22,10 @@ return [
     'allowed_origins' => [
         'http://localhost:3000',
         'https://edoxo-pro-uz7d-anjmrbvoa-3mcodes-projects-90685ea0.vercel.app',
+        'https://edoxo-pro-eta.vercel.app',
         env('APP_URL')
     ],
+
 
     'allowed_origins_patterns' => [],
 
