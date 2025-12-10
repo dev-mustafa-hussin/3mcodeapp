@@ -16,6 +16,17 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            echo "Current Dir: $(pwd)"
+            ls -la
+            # Attempt to switch to project directory if it exists
+            if [ -d "domains/alarabia-cosmetics.com" ]; then
+              cd domains/alarabia-cosmetics.com
+              echo "Changed to domains/alarabia-cosmetics.com"
+            elif [ -n "${{ secrets.PROJECT_PATH }}" ] && [ -d "${{ secrets.PROJECT_PATH }}" ]; then
+              cd ${{ secrets.PROJECT_PATH }}
+              echo "Changed to ${{ secrets.PROJECT_PATH }}"
+            fi
+            echo "Final Dir: $(pwd)"
             git pull origin master
             php artisan migrate --force
             php artisan optimize:clear
