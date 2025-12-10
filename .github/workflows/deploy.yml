@@ -16,7 +16,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd domains/alarabia-cosmetics.com
+            cd ${{ secrets.PROJECT_PATH }}
             git pull origin master
             php artisan migrate --force
             php artisan optimize:clear
