@@ -113,9 +113,15 @@ class AuthController extends Controller
 
         $user->save();
 
-        // Append full avatar URL to the user object
-        $user->avatar_url = $user->avatar ? asset('storage/' . $user->avatar) : null;
+        // Send notification to the user (and potentially admins)
+        try {
+            $user->notify(new \App\Notifications\ProfileUpdated($user));
+        } catch (\Exception $e) {
+            // Log error but don't fail the request
+            \Illuminate\Support\Facades\Log::error('Failed to send profile notification: ' . $e->getMessage());
+        }
 
+        // Return user with new data
         return response()->json([
             'message' => 'تم تحديث البيانات بنجاح',
             'user' => $user,

@@ -20,7 +20,16 @@ Route::prefix('v1')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout']);
         Route::get('auth/user', [AuthController::class, 'user']);
         Route::post('auth/profile', [AuthController::class, 'updateProfile']);
+        
+        // Notifications
+        Route::get('notifications', [App\Http\Controllers\Api\V1\NotificationController::class, 'index']);
+        Route::get('notifications/unread', [App\Http\Controllers\Api\V1\NotificationController::class, 'unread']);
+        Route::post('notifications/{id}/read', [App\Http\Controllers\Api\V1\NotificationController::class, 'markAsRead']);
+        Route::post('notifications/read-all', [App\Http\Controllers\Api\V1\NotificationController::class, 'markAllAsRead']);
 
+        // Permissions
+        Route::get('permissions', [App\Http\Controllers\Api\V1\PermissionController::class, 'index']);
+        Route::post('permissions', [App\Http\Controllers\Api\V1\PermissionController::class, 'store']);
 
         // Dashboard
         Route::get('dashboard/stats', [DashboardController::class, 'stats']);

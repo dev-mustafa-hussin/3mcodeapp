@@ -51,4 +51,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'avatar_url',
+    ];
+
+    /**
+     * Get the user's avatar URL.
+     */
+    public function getAvatarUrlAttribute(): ?string
+    {
+        if (!$this->avatar) {
+            return null;
+        }
+        return url('storage/' . $this->avatar);
+    }
 }
