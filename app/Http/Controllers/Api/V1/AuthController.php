@@ -81,16 +81,40 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
+            'phone' => 'nullable|string|max:20',
+            'job_title' => 'nullable|string|max:100',
+            'avatar' => 'nullable|image|max:2048', // Max 2MB
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
+        
+        if ($request->has('phone')) {
+            $user->phone = $request->phone;
+        }
+
+        if ($request->has('job_title')) {
+            $user->job_title = $request->job_title;
+        }
+
+        if ($request->hasFile('avatar')) {
+            // Delete old avatar if exists
+            if ($user->avatar && \Illuminate\Support\Facades\Storage::disk('public')->exists($user->avatar)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($user->avatar);
+            }
+
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $path;
+        }
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
 
         $user->save();
+
+        // Append full avatar URL to the user object
+        $user->avatar_url = $user->avatar ? asset('storage/' . $user->avatar) : null;
 
         return response()->json([
             'message' => 'تم تحديث البيانات بنجاح',
