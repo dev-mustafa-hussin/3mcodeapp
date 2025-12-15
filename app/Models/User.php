@@ -13,6 +13,11 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function permissionRequests()
+    {
+        return $this->hasMany(PermissionRequest::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
