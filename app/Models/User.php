@@ -30,6 +30,8 @@ class User extends Authenticatable
         'currency',
         'phone',
         'job_title',
+        'bio',
+        'last_login_at',
         'avatar',
         'password',
     ];

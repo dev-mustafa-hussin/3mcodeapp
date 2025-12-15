@@ -56,6 +56,9 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $user->last_login_at = now();
+        $user->save();
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -85,6 +88,7 @@ class AuthController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
             'job_title' => 'nullable|string|max:100',
+            'bio' => 'nullable|string|max:500',
             'avatar' => 'nullable|image|max:2048', // Max 2MB
         ]);
 
@@ -97,6 +101,10 @@ class AuthController extends Controller
 
         if ($request->has('job_title')) {
             $user->job_title = $request->job_title;
+        }
+
+        if ($request->has('bio')) {
+            $user->bio = $request->bio;
         }
 
         if ($request->hasFile('avatar')) {
