@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\V1\SaleController;
 use App\Http\Controllers\Api\V1\WarehouseController;
 use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\ReportController;
+use App\Http\Controllers\Api\V1\SettingController;
 
 Route::prefix('v1')->group(function () {
 
@@ -55,6 +56,10 @@ Route::prefix('v1')->group(function () {
     Route::get('/reports/purchases', [ReportController::class, 'purchases']);
     Route::get('/reports/stock', [ReportController::class, 'stock']);
     Route::get('/reports/profit-loss', [ReportController::class, 'profitLoss']);
+    
+    // Settings Routes
+    Route::get('/settings', [SettingController::class, 'index']);
+    Route::post('/settings', [SettingController::class, 'update']);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
         Route::apiResource('invoices', InvoiceController::class);
