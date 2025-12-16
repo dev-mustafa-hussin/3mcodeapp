@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\InvoiceController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\SupplierController;
+use App\Http\Controllers\Api\V1\PurchaseController;
 
 Route::prefix('v1')->group(function () {
 
@@ -38,6 +39,7 @@ Route::prefix('v1')->group(function () {
         // Resources
         Route::apiResource('customers', CustomerController::class);
         Route::apiResource('suppliers', SupplierController::class);
+        Route::apiResource('purchases', PurchaseController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
         Route::apiResource('invoices', InvoiceController::class);
