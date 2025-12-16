@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\PurchaseController;
 use App\Http\Controllers\Api\V1\PurchaseReturnController;
 use App\Http\Controllers\Api\V1\SaleController;
+use App\Http\Controllers\Api\V1\WarehouseController;
+use App\Http\Controllers\Api\V1\StockTransferController;
 
 Route::prefix('v1')->group(function () {
 
@@ -44,6 +46,8 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('purchases', PurchaseController::class);
     Route::apiResource('purchase-returns', PurchaseReturnController::class);
     Route::apiResource('sales', SaleController::class);
+    Route::apiResource('warehouses', WarehouseController::class);
+    Route::apiResource('stock-transfers', StockTransferController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
         Route::apiResource('invoices', InvoiceController::class);
