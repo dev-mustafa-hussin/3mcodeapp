@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout']);
         Route::get('auth/user', [AuthController::class, 'user']);
         Route::post('auth/profile', [AuthController::class, 'updateProfile']);
-        
+
         // Notifications
         Route::get('notifications', [App\Http\Controllers\Api\V1\NotificationController::class, 'index']);
         Route::get('notifications/unread', [App\Http\Controllers\Api\V1\NotificationController::class, 'unread']);
@@ -36,10 +36,10 @@ Route::prefix('v1')->group(function () {
 
         // Resources
         Route::apiResource('customers', CustomerController::class);
+        Route::apiResource('suppliers', SupplierController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
         Route::apiResource('invoices', InvoiceController::class);
         Route::apiResource('payments', PaymentController::class);
     });
-
 });
