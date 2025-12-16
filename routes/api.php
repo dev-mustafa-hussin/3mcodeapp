@@ -65,7 +65,8 @@ Route::prefix('v1')->group(function () {
     Route::get('expense-categories', [ExpenseController::class, 'categories']);
     Route::post('expense-categories', [ExpenseController::class, 'storeCategory']);
     Route::apiResource('expenses', ExpenseController::class);
-        Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('damaged-stocks', DamagedStockController::class);
+    Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
         Route::apiResource('invoices', InvoiceController::class);
         Route::apiResource('payments', PaymentController::class);
