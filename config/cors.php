@@ -21,8 +21,9 @@ return [
 
     'allowed_origins' => [
         'http://localhost:3000',
-        'https://edoxo-pro-uz7d-anjmrbvoa-3mcodes-projects-90685ea0.vercel.app',
         'https://edoxo-pro-eta.vercel.app',
+        'https://app.smart-retail.3mcode-solutions.com',
+        'https://smart-retail.3mcode-solutions.com',
         env('APP_URL')
     ],
 
