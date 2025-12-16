@@ -58,8 +58,13 @@ Route::prefix('v1')->group(function () {
     Route::get('/reports/profit-loss', [ReportController::class, 'profitLoss']);
     
     // Settings Routes
-    Route::get('/settings', [SettingController::class, 'index']);
-    Route::post('/settings', [SettingController::class, 'update']);
+    Route::apiResource('settings', SettingController::class)->only(['index', 'update']);
+    Route::post('settings', [SettingController::class, 'update']); // Fix for POST update
+
+    // Expenses
+    Route::get('expense-categories', [ExpenseController::class, 'categories']);
+    Route::post('expense-categories', [ExpenseController::class, 'storeCategory']);
+    Route::apiResource('expenses', ExpenseController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
         Route::apiResource('invoices', InvoiceController::class);
