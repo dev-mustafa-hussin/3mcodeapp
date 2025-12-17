@@ -14,6 +14,12 @@ Route::get('/fix-db', function () {
     return "<h1>Database Migrated Successfully!</h1><p>You can now go back and use the system.</p>";
 });
 
+// Temporary Route to Seed Roles
+Route::get('/seed-roles', function () {
+    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'RolesAndPermissionsSeeder', '--force' => true]);
+    return "<h1>Roles & Permissions Seeded!</h1><p>Super Admin assigned to ceo@3mcode-solutions.com</p>";
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
