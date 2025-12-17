@@ -14,9 +14,11 @@ use App\Http\Controllers\Api\V1\PurchaseController;
 use App\Http\Controllers\Api\V1\PurchaseReturnController;
 use App\Http\Controllers\Api\V1\SaleController;
 use App\Http\Controllers\Api\V1\WarehouseController;
-use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\ReportController;
 use App\Http\Controllers\Api\V1\SettingController;
+use App\Http\Controllers\Api\V1\ExpenseController;
+use App\Http\Controllers\Api\V1\DamagedStockController;
+use App\Http\Controllers\Api\V1\UserController;
 
 Route::prefix('v1')->group(function () {
 
