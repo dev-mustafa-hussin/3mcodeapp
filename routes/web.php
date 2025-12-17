@@ -8,6 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Temporary Route to Fix Database Migration
+Route::get('/fix-db', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    return "<h1>Database Migrated Successfully!</h1><p>You can now go back and use the system.</p>";
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
