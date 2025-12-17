@@ -2,11 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PermissionRequest extends Model
 {
-    protected $fillable = ['user_id', 'permission', 'reason', 'status'];
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'permission_name',
+        'url',
+        'reason',
+        'status',
+    ];
 
     public function user()
     {

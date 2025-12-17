@@ -8,17 +8,24 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
 
 class PermissionRequestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $requestedPermission;
+    public $url;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(User $user, $requestedPermission, $url)
     {
-        //
+        $this->user = $user;
+        $this->requestedPermission = $requestedPermission;
+        $this->url = $url;
     }
 
     /**
@@ -27,7 +34,7 @@ class PermissionRequestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Permission Request Mail',
+            subject: 'New Access Request: ' . $this->user->name,
         );
     }
 
@@ -37,7 +44,12 @@ class PermissionRequestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.permission-request',
+            with: [
+                'user' => $this->user,
+                'requestedPermission' => $this->requestedPermission,
+                'url' => $this->url,
+            ],
         );
     }
 
