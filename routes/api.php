@@ -26,6 +26,8 @@ Route::prefix('v1')->group(function () {
     // Auth Routes
     Route::post('auth/register', [AuthController::class, 'register']);
     Route::post('auth/login', [AuthController::class, 'login']);
+    Route::post('auth/forgot-password', [App\Http\Controllers\Api\V1\PasswordResetController::class, 'sendResetLinkEmail']);
+    Route::post('auth/reset-password', [App\Http\Controllers\Api\V1\PasswordResetController::class, 'reset']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout']);
