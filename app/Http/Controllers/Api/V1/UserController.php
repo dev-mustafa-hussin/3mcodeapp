@@ -28,7 +28,7 @@ class UserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            // 'role' => $validated['role'] ?? 'user', // Need to add role column if not exists or use Spatie
+            'role' => $validated['role'] ?? 'user',
         ]);
 
         return response()->json($user, 201);
