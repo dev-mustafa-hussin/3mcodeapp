@@ -24,17 +24,6 @@ use App\Http\Controllers\Api\V1\RoleController;
 Route::prefix('v1')->group(function () {
 
     // Auth Routes
-    Route::get('test-email', function () {
-        try {
-            Illuminate\Support\Facades\Mail::raw('Test email content', function ($msg) {
-                $msg->to('ceo@3mcode-solutions.com')->subject('Test Email');
-            });
-            return 'Sent successfully';
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-    });
-
     Route::post('auth/register', [AuthController::class, 'register']);
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::post('auth/forgot-password', [App\Http\Controllers\Api\V1\PasswordResetController::class, 'sendResetLinkEmail']);
