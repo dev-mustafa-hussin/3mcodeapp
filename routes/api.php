@@ -41,6 +41,7 @@ Route::prefix('v1')->group(function () {
         // Permissions
         Route::get('permissions', [App\Http\Controllers\Api\V1\PermissionController::class, 'index']);
         Route::post('permissions', [App\Http\Controllers\Api\V1\PermissionController::class, 'store']);
+        Route::post('permission-request', [App\Http\Controllers\Api\V1\PermissionRequestController::class, 'store']);
 
         // Dashboard
         Route::get('dashboard/stats', [DashboardController::class, 'stats']);
