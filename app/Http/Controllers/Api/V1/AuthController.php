@@ -59,10 +59,14 @@ class AuthController extends Controller
         $user->last_login_at = now();
         $user->save();
 
+        // Load roles and permissions
+        $permissions = $user->getAllPermissions()->pluck('name');
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user
+            'user' => $user,
+            'permissions' => $permissions
         ]);
     }
 
@@ -75,7 +79,13 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        $user = $request->user();
+        $permissions = $user->getAllPermissions()->pluck('name');
+        
+        return response()->json([
+            'user' => $user,
+            'permissions' => $permissions
+        ]);
     }
 
     public function updateProfile(Request $request)
