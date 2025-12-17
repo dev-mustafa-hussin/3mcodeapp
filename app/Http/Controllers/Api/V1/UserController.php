@@ -21,7 +21,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'nullable|string' // Assuming dynamic or string role for now
+            'role' => 'nullable|string'
         ]);
 
         $user = User::create([
@@ -30,6 +30,11 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'] ?? 'user',
         ]);
+
+        // Assign Spatie Role
+        if (!empty($validated['role'])) {
+            $user->assignRole($validated['role']);
+        }
 
         return response()->json($user, 201);
     }
@@ -55,6 +60,11 @@ class UserController extends Controller
         }
 
         $user->update($validated);
+
+        // Sync Spatie Role
+        if (isset($validated['role'])) {
+            $user->syncRoles([$validated['role']]);
+        }
 
         return response()->json($user);
     }
