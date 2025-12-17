@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\SettingController;
 use App\Http\Controllers\Api\V1\ExpenseController;
 use App\Http\Controllers\Api\V1\DamagedStockController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\RoleController;
 
 Route::prefix('v1')->group(function () {
 
@@ -73,5 +74,7 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('invoices', InvoiceController::class);
         Route::apiResource('payments', PaymentController::class);
         Route::apiResource('users', UserController::class);
+        Route::apiResource('roles', RoleController::class);
+        Route::get('permissions', [RoleController::class, 'permissions']);
     });
 });
