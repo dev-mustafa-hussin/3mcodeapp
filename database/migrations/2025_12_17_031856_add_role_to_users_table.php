@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Adding role column for user management permissions
+            // Adding role column to users table - Force Update
             $table->string('role')->default('user')->after('email');
         });
     }
